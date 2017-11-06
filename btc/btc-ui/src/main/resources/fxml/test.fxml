@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
+	<center>
+		<SplitPane>
+			<Pane>
+				<fx:include source="ticks.fxml" fx:id="ticks"/>
+			</Pane>
+		</SplitPane>
+	</center>
+</BorderPane>

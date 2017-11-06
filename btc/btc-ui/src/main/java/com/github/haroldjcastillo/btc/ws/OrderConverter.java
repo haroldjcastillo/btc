@@ -24,9 +24,9 @@ import org.json.JSONObject;
  *
  * @author harold.castillo
  */
-public class TradeConverter {
+public class OrderConverter {
 
-    private static final Logger LOGGER = LogManager.getLogger(TradeConverter.class);
+    private static final Logger LOGGER = LogManager.getLogger(OrderConverter.class);
 
     public static void convert(final String frame) {
         final JSONObject json = new JSONObject(frame);

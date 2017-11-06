@@ -10,9 +10,9 @@ import org.apache.logging.log4j.LogManager;
  *
  * @author harold.castillo
  */
-public class TradeObserver implements Observer<String> {
+public class OrderObserver implements Observer<String> {
 
-    private static final Logger LOGGER = LogManager.getLogger(TradeObserver.class);
+    private static final Logger LOGGER = LogManager.getLogger(OrderObserver.class);
     
     @Override
     public void onSubscribe(Disposable disposable) {
@@ -21,7 +21,7 @@ public class TradeObserver implements Observer<String> {
 
     @Override
     public void onNext(final String frame) {
-        TradeConverter.convert(frame);
+        OrderConverter.convert(frame);
     }
 
     @Override

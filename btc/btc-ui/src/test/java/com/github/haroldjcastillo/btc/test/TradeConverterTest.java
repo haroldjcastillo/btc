@@ -6,7 +6,7 @@ import com.github.haroldjcastillo.btc.dao.Bitso;
 import com.github.haroldjcastillo.btc.dao.Order;
 import com.github.haroldjcastillo.btc.dao.OrderPayload;
 import com.github.haroldjcastillo.btc.ui.AbstractController;
-import com.github.haroldjcastillo.btc.ws.TradeConverter;
+import com.github.haroldjcastillo.btc.ws.OrderConverter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,13 +33,13 @@ public class TradeConverterTest {
 
     @RepeatedTest(5)
     public void toOrders() {
-        TradeConverter.convert(ORDERS);
+        OrderConverter.convert(ORDERS);
     }
 
     @Test
     @Disabled
     public void toOrdersVoid() {
-        TradeConverter.convert(ORDERS_VOID);
+        OrderConverter.convert(ORDERS_VOID);
     }
 
     @RepeatedTest(5)

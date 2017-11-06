@@ -13,7 +13,8 @@ import java.nio.file.Paths;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import com.github.haroldjcastillo.business.config.Configuration;
@@ -21,7 +22,7 @@ import com.github.haroldjcastillo.business.config.HttpHost;
 
 public class ConfigTest {
 
-	private static final Logger LOGGER = Logger.getLogger(ConfigTest.class);
+	private static final Logger LOGGER = LogManager.getLogger(ConfigTest.class);
 
 	@Test
 	public void toJson() {

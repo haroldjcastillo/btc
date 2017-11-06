@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="701.0" style="-fx-border-color: #000000; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.FXMLController">
    <children>
       <JFXTextField fx:id="top" labelFloat="true" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="99.0" promptText="Top best values" />
@@ -16,7 +17,7 @@
             <Image url="@../images/icons8_Delete_24px.png" />
          </image>
       </ImageView>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="131.0" text="Bitso trades">
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="171.0" text="Bitso trades">
          <font>
             <Font size="24.0" />
          </font>
@@ -38,16 +39,8 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="552.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/icons8_Sort_Down_48px.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="536.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/icons8_Sort_Up_48px_1.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="tick" layoutX="633.0" layoutY="80.0" text="0 ticks" />
+		<fx:define>
+     		<fx:include fx:id="dialog" source="ticks.fxml" />
+  		</fx:define>
    </children>
 </AnchorPane>
