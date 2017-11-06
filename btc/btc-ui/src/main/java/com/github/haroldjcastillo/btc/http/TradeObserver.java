@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable;
 
 public class TradeObserver implements Observer<HttpResponse> {
 	
-public static final Logger LOGGER = LogManager.getLogger(TradeObserver.class);
+	public static final Logger LOGGER = LogManager.getLogger(TradeObserver.class);
 	
 	@Override
 	public void onComplete() {
@@ -26,14 +26,12 @@ public static final Logger LOGGER = LogManager.getLogger(TradeObserver.class);
 	@Override
 	public void onNext(HttpResponse response) {
 		if(response.getCode() == HttpStatus.SC_OK)
-			TradeManager.manage(String.valueOf(response.getContent()));
-		LOGGER.info(new String(response.getContent()));
+			TradeManager.manage(new String(response.getContent()));
 	}
 
 	@Override
 	public void onSubscribe(Disposable disposable) {
 		LOGGER.debug("Subscribing, disposable: " + disposable);
 	}
-
 
 }

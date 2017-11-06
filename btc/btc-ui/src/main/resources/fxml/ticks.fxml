@@ -7,24 +7,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="129.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.TickController">
+<VBox prefHeight="50.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.TickController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane style="-fx-background-color: #01579b;">
          <children>
-            <Label fx:id="descriptionTick" layoutX="158.0" layoutY="64.0" text="Label" />
-            <Label fx:id="tickCount" layoutX="107.0" layoutY="64.0" text="Label" />
-            <Label layoutX="256.0" layoutY="17.0" text="Ticks">
+            <Label fx:id="descriptionTick" layoutX="200.0" layoutY="18.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font></Label>
+            <Label fx:id="tickCount" layoutX="149.0" layoutY="18.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="25.0" layoutY="15.0" text="Ticks" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="dowmImage" fitHeight="48.0" fitWidth="48.0" layoutX="42.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dowmImage" fitHeight="48.0" fitWidth="48.0" layoutX="101.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons8_Sort_Down_48px.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="upImage" fitHeight="48.0" fitWidth="48.0" layoutX="22.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="upImage" fitHeight="48.0" fitWidth="48.0" layoutX="81.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons8_Sort_Up_48px_1.png" />
                </image>

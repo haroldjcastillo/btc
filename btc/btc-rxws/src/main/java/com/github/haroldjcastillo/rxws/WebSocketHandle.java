@@ -58,12 +58,15 @@ public class WebSocketHandle extends ChannelInboundHandlerAdapter {
 		final Channel channel = channelHandlerContext.channel();
 
 		if (!handshaker.isHandshakeComplete()) {
+			FullHttpResponse response = (FullHttpResponse) message;
 			handshaker.finishHandshake(channel, (FullHttpResponse) message);
+			response.release();
 			channelPromise.setSuccess();
 		} else {
 
 			if (message instanceof FullHttpResponse) {
 				final FullHttpResponse response = (FullHttpResponse) message;
+				response.release();
 				throw new Exception("Unexpected FullHttpResponse (getStatus=" + response.status() + ", content="
 						+ response.content().toString(CharsetUtil.UTF_8) + ')');
 			}
@@ -71,9 +74,11 @@ public class WebSocketHandle extends ChannelInboundHandlerAdapter {
 			if (message instanceof TextWebSocketFrame) {
 				final TextWebSocketFrame textFrame = (TextWebSocketFrame) message;
 				publisher.sendEvent(textFrame.text());
+				textFrame.release();
 			}
 
 			if (message instanceof CloseWebSocketFrame) {
+				((CloseWebSocketFrame) message).release();
 				LOGGER.debug(String.format("[Close webSocket frame] %s", message));
 			}
 		}

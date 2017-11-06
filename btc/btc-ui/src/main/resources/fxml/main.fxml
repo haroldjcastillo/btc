@@ -1,46 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
+	<top>
+		<Pane>
+			<fx:include fx:id="header" source="header.fxml" />
+		</Pane>
+	</top>
+	<center>
+		<Pane>
+			<fx:include fx:id="ticks" source="ticks.fxml" />
+		</Pane>
+	</center>
+	<bottom>
+		<Pane>
+			<fx:include fx:id="orders" source="orders.fxml" />
+		</Pane>
+	</bottom>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="701.0" style="-fx-border-color: #000000; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.FXMLController">
-   <children>
-      <JFXTextField fx:id="top" labelFloat="true" layoutX="14.0" layoutY="59.0" prefHeight="25.0" prefWidth="99.0" promptText="Top best values" />
-      <ImageView fx:id="closeButton" layoutX="663.0" layoutY="14.0" onMouseClicked="#closeeButtonAction" style="-fx-cursor: hand;">
-         <image>
-            <Image url="@../images/icons8_Delete_24px.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="171.0" text="Bitso trades">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="108.0" text="Bids">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="13.0" layoutY="293.0" text="Asks">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TableView fx:id="bidsTableView" layoutX="13.0" layoutY="135.0" prefHeight="148.0" prefWidth="674.0" />
-      <TableView fx:id="asksTableView" layoutX="13.0" layoutY="317.0" prefHeight="148.0" prefWidth="674.0" />
-      <Label layoutX="15.0" layoutY="471.0" text="* The tables have been ordered by value field">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-		<fx:define>
-     		<fx:include fx:id="dialog" source="ticks.fxml" />
-  		</fx:define>
-   </children>
-</AnchorPane>
+</BorderPane>

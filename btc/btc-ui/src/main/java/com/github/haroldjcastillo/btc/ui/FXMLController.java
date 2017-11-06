@@ -10,52 +10,23 @@ import com.github.haroldjcastillo.rxws.WebSocket;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 public class FXMLController extends AbstractController {
 	
-	@FXML
-	private TickController tickController;
-
-    @FXML
-    private JFXTextField top;
-
-    @FXML
-    private ImageView closeButton;
-
-    @FXML
-    private TableView<OrderPayload> bidsTableView;
-
-    @FXML
-    private TableView<OrderPayload> asksTableView;
+	@FXML private TickController tickController;
+    @FXML private JFXTextField top;
+    @FXML private TableView<OrderPayload> bidsTableView;
+    @FXML private TableView<OrderPayload> asksTableView;
+	private ScheduleHttp schedule;
     
-    @FXML
-	private Label tickCount;
-	
-	@FXML
-	private Label descriptionTick;
-	
-	@FXML
-	private ImageView  upImage;
-	
-	@FXML
-	private ImageView downImage;
-
-    @FXML
-    private void closeeButtonAction(MouseEvent event) {
+    public void shutDown() {
         try {
-            final Stage stage = (Stage) closeButton.getScene().getWindow();            
-            schedule.stop();
             WebSocket.getInstance().disconnect();
-            stage.close();
         } catch (InterruptedException ex) {
-            System.err.println(ex.getMessage());
+            LOGGER.error(ex.getMessage());
         }
     }
     
@@ -70,17 +41,25 @@ public class FXMLController extends AbstractController {
     }
     
     @FXML
-    private void initialize() {
-        top.setText(BEST.toString());
+    public void initialize() {
+    	service().run();
+    	top.setText(BEST.toString());
         addOrderPayloadColumn(bidsTableView);
         addOrderPayloadColumn(asksTableView);
         asksTableView.setItems(ASKS);
         bidsTableView.setItems(BIDS);
         loadListeners();
-        connectWebsocket();
-        startTrades(1);
-		tickCount.setText(String.valueOf(TICKS.get()));
-		descriptionTick.setText(String.valueOf(TICK_TYPE.get().getValue()));
+    }
+
+    public Runnable service() {
+    	
+    	return new Runnable() {
+			@Override
+			public void run() {
+		        connectWebsocket();
+		        startTrades(1);
+			}
+		};
     }
 
     public void connectWebsocket() {
@@ -121,7 +100,7 @@ public class FXMLController extends AbstractController {
         value.prefWidthProperty().bind(table.widthProperty().divide(5));
         table.getColumns().add(value);
     }
-	
+
 	public void startTrades(final long delay) {
 		final String url = "https://api.bitso.com/v3/trades/?book=btc_mxn&marker&sort=desc&limit=1";
 		final TradeObserver observer = new TradeObserver();

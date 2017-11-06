@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author harold.castillo
  */
-public class TradeConverterTest {
+public class OrderConverterTest {
 
     private static final String ORDERS = "{ \"type\": \"orders\", \"book\": \"btc_mxn\", \"payload\": { \"bids\": [ { \"r\": \"7185\", \"a\": \"0.001343\", \"v\": \"9.64\", \"t\": 1, \"d\": 1455315394039 }, { \"r\": \"7183.01\", \"a\": \"0.007715\", \"v\": \"55.41\", \"t\": 1, \"d\": 1455314938419 }, { \"r\": \"7183\", \"a\": \"1.59667303\", \"v\": \"11468.9\", \"t\": 1, \"d\": 1455314894615 } ], \"asks\": [ { \"r\": \"7251.1\", \"a\": \"0.29437179\", \"v\": \"2134.51\", \"t\": 0, \"d\": 1455315979682 }, { \"r\": \"7251.72\", \"a\": \"1.32057812\", \"v\": \"9576.46\", \"t\": 0, \"d\": 1455303931277 } ] } }";
     private static final String ORDERS_VOID = "{ \"type\": \"orders\" }";
@@ -77,7 +77,7 @@ public class TradeConverterTest {
             final String json = objectMapper.writeValueAsString(obj);
             System.out.println(json);
         } catch (JsonProcessingException ex) {
-            Logger.getLogger(TradeConverterTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderConverterTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

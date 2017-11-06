@@ -6,6 +6,11 @@ import com.github.haroldjcastillo.btc.dao.Bitso;
 import com.github.haroldjcastillo.btc.dao.Order;
 import com.github.haroldjcastillo.btc.dao.OrderPayload;
 import com.github.haroldjcastillo.btc.ui.AbstractController;
+
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.util.Comparator.comparing;
@@ -50,14 +55,14 @@ public class OrderConverter {
                                 .sorted((o1, o2) -> o2.compareTo(o1))
                                 .limit(AbstractController.BEST.intValue())
                                 .collect(Collectors.toList());
-                        AbstractController.updateOrderPayload(AbstractController.BIDS, orderedBids);
+                        updateOrderPayload(AbstractController.BIDS, orderedBids);
                         final List<OrderPayload> orderedAsks = Stream.concat(asks.stream(), copyAsks.stream())
                                 .collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparing(OrderPayload::getV))), ArrayList::new))
                                 .stream()
                                 .sorted((o1, o2) -> o2.compareTo(o1))
                                 .limit(AbstractController.BEST.intValue())
                                 .collect(Collectors.toList());
-                        AbstractController.updateOrderPayload(AbstractController.ASKS, orderedAsks);
+                        updateOrderPayload(AbstractController.ASKS, orderedAsks);
                     }
                 } catch (Exception e) {
                     System.out.println(frame);
@@ -65,5 +70,17 @@ public class OrderConverter {
                 }
             }
         }
+    }
+    
+    public static void updateOrderPayload(final ObservableList<OrderPayload> orderPayload, final List<OrderPayload> orderPayloadSorted) {
+        new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                Platform.runLater(() -> {
+                    orderPayload.setAll(orderPayloadSorted);
+                });
+                return Void.TYPE.newInstance();
+            }
+        }.run();
     }
 }
