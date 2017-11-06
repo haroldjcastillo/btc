@@ -1,0 +1,13 @@
+{
+	"connectTimeout": 15000,
+	"connectionRequestTimeout": 30000,
+	"defaultMaxPerRoute": 20,
+	"httpHost": [
+		{
+			"hostName": "localhost",
+			"port": 8080
+		}
+	],
+	"maxTotal": 100,
+	"socketTimeout": 15000
+}
