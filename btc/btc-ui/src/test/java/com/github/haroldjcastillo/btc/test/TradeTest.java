@@ -22,9 +22,9 @@ public class TradeTest {
 		ScheduleHttp schedule = null;
 
 		try {
-			final String url = "https://api.bitso.com/v3/trades/?book=btc_mxn&marker&sort=desc&limit=1";
+			final String url = "https://api.bitso.com/v3/trades/?book=btc_mxn&marker&sort=desc&limit=20";
 			final TradeObserver observer = new TradeObserver();
-			schedule = new ScheduleHttp(url, 1, Arrays.asList(observer));
+			schedule = new ScheduleHttp(url, 10, Arrays.asList(observer));
 			schedule.start();
 			Thread.sleep(60000);
 		} catch (Exception e) {

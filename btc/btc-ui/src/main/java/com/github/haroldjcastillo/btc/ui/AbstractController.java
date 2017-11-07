@@ -10,8 +10,6 @@ import org.apache.logging.log4j.Logger;
 import com.github.haroldjcastillo.btc.dao.OrderPayload;
 import com.github.haroldjcastillo.btc.http.TickType;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -32,13 +30,9 @@ public abstract class AbstractController {
 	
 	public static final AtomicInteger TICKS = new AtomicInteger(0);
 	
-	public static ObservableValue<String> ticksObject = new SimpleStringProperty();
-	
 	public static final AtomicReference<Double> CURRENT_PRICE = new AtomicReference<Double>(0.0);
 	
 	public static final AtomicReference<TickType> TICK_TYPE = new AtomicReference<TickType>(TickType.NEUTRAL);
-	
-	public static ObservableValue<String> tickTypeObject = new SimpleStringProperty();
 
 	protected <T> T getControler(final String controller) {
 		final FXMLLoader loader = new FXMLLoader();

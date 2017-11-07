@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #002f6c;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #002f6c;" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
    <children>
       <AnchorPane>
          <children>
@@ -16,7 +16,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <ImageView fx:id="closeButton" fitHeight="32.0" fitWidth="32.0" layoutX="654.0" layoutY="10.0" onMouseClicked="#closeeButtonAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="closeButton" fitHeight="32.0" fitWidth="32.0" layoutX="654.0" layoutY="7.0" onMouseClicked="#closeeButtonAction" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
                <image>
                   <Image url="@../images/icons8_Shutdown_48px.png" />
                </image>

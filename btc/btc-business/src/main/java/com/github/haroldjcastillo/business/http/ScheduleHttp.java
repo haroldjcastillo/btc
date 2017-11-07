@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 
 public class ScheduleHttp {
-	
+
 	public static final Logger LOGGER = LogManager.getLogger(ScheduleHttp.class);
 	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	private HttpPublisher publisher = new HttpPublisher();
@@ -25,8 +25,9 @@ public class ScheduleHttp {
 	private ScheduledFuture<?> beeperHandle;
 	private final String service;
 	private final long delay;
-	
-	public ScheduleHttp(final String service, final long delay, final List<? extends Observer<HttpResponse>> observers) {
+
+	public ScheduleHttp(final String service, final long delay,
+			final List<? extends Observer<HttpResponse>> observers) {
 		this.service = service;
 		this.delay = delay;
 		observers.forEach(observer -> {
@@ -47,8 +48,9 @@ public class ScheduleHttp {
 		};
 		this.beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, delay, SECONDS);
 	}
-	
+
 	public void stop() {
 		beeperHandle.cancel(true);
+		scheduler.shutdownNow();
 	}
 }

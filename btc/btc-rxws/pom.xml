@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>btc-rxws</artifactId>
 	<version>0.0.2</version>
-	<name>Reactive WebSocket</name>
+	<name>Bitcoin Reactive WebSocket</name>
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>

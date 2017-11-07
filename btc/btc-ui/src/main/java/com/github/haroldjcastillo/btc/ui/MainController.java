@@ -12,14 +12,16 @@ public class MainController extends AbstractController {
 	@FXML
 	private ImageView closeButton;
 
-	@FXML TickController ticksController;
+	@FXML
+	TickController ticksController;
 
-	@FXML FXMLController ordersController;
+	@FXML
+	OrderController ordersController;
 
 	@FXML
 	public void initialize() {
-		ticksController =  getControler(Contoller.TICK.getValue());
-		ordersController =  getControler(Contoller.ORDER.getValue());
+		ticksController = getControler(Contoller.TICK.getValue());
+		ordersController = getControler(Contoller.ORDER.getValue());
 	}
 
 	@FXML
@@ -28,7 +30,6 @@ public class MainController extends AbstractController {
 		ordersController.shutDown();
 		final Stage stage = (Stage) closeButton.getScene().getWindow();
 		stage.close();
-		System.out.println("Shutdown successful");
 	}
 
 }

@@ -1,5 +1,21 @@
 package com.github.haroldjcastillo.btc.ws;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.haroldjcastillo.btc.common.ObjectMapperFactory;
 import com.github.haroldjcastillo.btc.dao.Bitso;
@@ -10,20 +26,6 @@ import com.github.haroldjcastillo.btc.ui.AbstractController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import static java.util.Comparator.comparing;
-import java.util.List;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toCollection;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 
 /**
  *
@@ -45,10 +47,10 @@ public class OrderConverter {
                     if (order.getPayload() != null) {
                         final List<OrderPayload> bids = order.getPayload().getOrDefault(Bitso.Order.BIDS.getValue(), Collections.emptyList());
                         final List<OrderPayload> asks = order.getPayload().getOrDefault(Bitso.Order.ASKS.getValue(), Collections.emptyList());
-                        final List<OrderPayload> copyBids = new ArrayList<>(AbstractController.BIDS);
-                        Collections.copy(copyBids, AbstractController.BIDS);
-                        final List<OrderPayload> copyAsks = new ArrayList<>(AbstractController.ASKS);
-                        Collections.copy(copyAsks, AbstractController.ASKS);
+                        final List<OrderPayload> copyBids = new ArrayList<>();
+                        copyBids.addAll(AbstractController.BIDS);
+                        final List<OrderPayload> copyAsks = new ArrayList<>();
+                        copyAsks.addAll(AbstractController.ASKS);
                         final List<OrderPayload> orderedBids = Stream.concat(bids.stream(), copyBids.stream())
                                 .collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparing(OrderPayload::getV))), ArrayList::new))
                                 .stream()
@@ -64,10 +66,9 @@ public class OrderConverter {
                                 .collect(Collectors.toList());
                         updateOrderPayload(AbstractController.ASKS, orderedAsks);
                     }
-                } catch (Exception e) {
-                    System.out.println(frame);
-                    LOGGER.error(e.getMessage(), e);
-                }
+                } catch (IOException e) {
+					LOGGER.error(e.getMessage(), e);
+				}
             }
         }
     }
