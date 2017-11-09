@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.OrderController">
    <children>
-      <JFXTextField fx:id="top" labelFloat="true" layoutX="14.0" layoutY="19.0" prefHeight="25.0" prefWidth="99.0" promptText="Top best values" />
+      <JFXTextField fx:id="top" layoutX="588.0" layoutY="59.0" prefHeight="25.0" prefWidth="99.0" promptText="Top best values" />
       <Label layoutX="14.0" layoutY="68.0" text="Bids">
          <font>
             <Font name="System Bold" size="12.0" />
