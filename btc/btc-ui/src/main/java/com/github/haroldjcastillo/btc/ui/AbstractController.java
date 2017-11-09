@@ -25,11 +25,11 @@ public abstract class AbstractController {
 	
 	public static final ObservableList<OrderPayload> BIDS = FXCollections.observableArrayList();
 	
-	public static ObservableList<TradePayloadResponse> DOWN_DATA = FXCollections.observableArrayList();
+	public static final ObservableList<TradePayloadResponse> DOWN_DATA = FXCollections.observableArrayList();
 	
 	public static final ObservableList<TradePayloadResponse> UP_DATA = FXCollections.observableArrayList();
 	
-	public static ObservableList<OrderPayload> ASKS = FXCollections.observableArrayList();
+	public static final ObservableList<OrderPayload> ASKS = FXCollections.observableArrayList();
 	
 	public static final AtomicInteger BEST = new AtomicInteger(10);
 	
@@ -43,9 +43,9 @@ public abstract class AbstractController {
 	
 	public static final AtomicInteger BUY = new AtomicInteger(0);
 	
-	public static final AtomicInteger M = new AtomicInteger(10);
+	public static final AtomicInteger M = new AtomicInteger(3);
 	
-	public static final AtomicInteger N = new AtomicInteger(10);
+	public static final AtomicInteger N = new AtomicInteger(2);
 
 	protected <T> T getControler(final String controller) {
 		final FXMLLoader loader = new FXMLLoader();

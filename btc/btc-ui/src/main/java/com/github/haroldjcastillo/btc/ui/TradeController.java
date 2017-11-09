@@ -74,29 +74,30 @@ public class TradeController extends AbstractController {
 	}
 
 	private void addTradeColumn(final TableView<TradePayloadResponse> table) {
+		
+		final TableColumn<TradePayloadResponse, Long> tId = new TableColumn<>("Trade id");
+		tId.setCellValueFactory(new PropertyValueFactory<>("tId"));
+		tId.prefWidthProperty().bind(table.widthProperty().divide(5));
+		table.getColumns().add(tId);
+		
 		final TableColumn<TradePayloadResponse, String> book = new TableColumn<>("Book");
 		book.setCellValueFactory(new PropertyValueFactory<>("book"));
-		book.prefWidthProperty().bind(table.widthProperty().divide(4));
+		book.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(book);
-		
-		final TableColumn<TradePayloadResponse, String> makerSide = new TableColumn<>("Maker side");
-		makerSide.setCellValueFactory(new PropertyValueFactory<>("makerSide"));
-		makerSide.prefWidthProperty().bind(table.widthProperty().divide(4));
-		table.getColumns().add(makerSide);
 		
 		final TableColumn<TradePayloadResponse, String> price = new TableColumn<>("price");
 		price.setCellValueFactory(new PropertyValueFactory<>("price"));
-		price.prefWidthProperty().bind(table.widthProperty().divide(4));
+		price.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(price);
 		
-		final TableColumn<TradePayloadResponse, String> tId = new TableColumn<>("Trade id");
-		tId.setCellValueFactory(new PropertyValueFactory<>("tId"));
-		tId.prefWidthProperty().bind(table.widthProperty().divide(4));
-		table.getColumns().add(tId);
+		final TableColumn<TradePayloadResponse, String> makerSide = new TableColumn<>("Maker side");
+		makerSide.setCellValueFactory(new PropertyValueFactory<>("makerSide"));
+		makerSide.prefWidthProperty().bind(table.widthProperty().divide(5));
+		table.getColumns().add(makerSide);
 		
 		final TableColumn<TradePayloadResponse, String> createdAt = new TableColumn<>("Created at");
 		createdAt.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
-		createdAt.prefWidthProperty().bind(table.widthProperty().divide(4));
+		createdAt.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(createdAt);
 	}
 

@@ -29,7 +29,7 @@ public class TickController extends AbstractController {
 
 	@FXML
 	public void initialize() {
-		service(5).run();
+		service(2).run();
 	}
 
 	public Runnable service(final long delay) {
@@ -47,7 +47,7 @@ public class TickController extends AbstractController {
 					@Override
 					public void handle(ActionEvent actionEvent) {
 						tickCount.setText(String.valueOf(Math.abs(TICKS.get())));
-						descriptionTick.setText(TICK_TYPE.get().getValue());
+						descriptionTick.setText(TICKS.get() > 1 ? TICK_TYPE.get().getValue().concat("s") : TICK_TYPE.get().getValue());
 					}
 				}), new KeyFrame(Duration.seconds(2)));
 				timeline.setCycleCount(Timeline.INDEFINITE);

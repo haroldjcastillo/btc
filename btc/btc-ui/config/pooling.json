@@ -4,8 +4,8 @@
 	"defaultMaxPerRoute": 20,
 	"httpHost": [
 		{
-			"hostName": "localhost",
-			"port": 8080
+			"hostName": "api.bitso.com",
+			"port": 80
 		}
 	],
 	"maxTotal": 100,

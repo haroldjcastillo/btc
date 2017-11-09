@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,20 +29,41 @@
             </Label>
             <Pane layoutY="1.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #fff;">
                <children>
-                  <JFXTextField fx:id="m" layoutX="24.0" layoutY="9.0" prefHeight="27.0" prefWidth="58.0" promptText="M" unFocusColor="#002171" />
-                  <JFXTextField fx:id="n" layoutX="99.0" layoutY="9.0" prefHeight="27.0" prefWidth="58.0" promptText="N" unFocusColor="#002171" />
-                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="373.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                  <JFXTextField fx:id="m" layoutX="179.0" layoutY="12.0" prefHeight="27.0" prefWidth="58.0" promptText="M" unFocusColor="#002171">
+                     <tooltip>
+                        <Tooltip autoHide="true" contentDisplay="BOTTOM" text="Consecutives upticks" />
+                     </tooltip></JFXTextField>
+                  <JFXTextField fx:id="n" layoutX="431.0" layoutY="12.0" prefHeight="27.0" prefWidth="58.0" promptText="N" unFocusColor="#002171">
+                     <tooltip>
+                        <Tooltip autoHide="true" contentDisplay="BOTTOM" text="Consecutives downticks" />
+                     </tooltip></JFXTextField>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="501.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons8-buy.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="481.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="243.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons8-return_purchase.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="buy" layoutX="416.0" layoutY="14.0" text="Label" />
-                  <Label fx:id="sell" layoutX="522.0" layoutY="14.0" text="Label" />
+                  <Label fx:id="buy" layoutX="544.0" layoutY="16.0" text="Label" />
+                  <Label fx:id="sell" layoutX="282.0" layoutY="20.0" text="Label" />
+                  <Label layoutX="14.0" layoutY="9.0" text="Consecutives">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="122.0" layoutY="20.0" text="Upticks">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="361.0" layoutY="20.0" text="Downticks">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>

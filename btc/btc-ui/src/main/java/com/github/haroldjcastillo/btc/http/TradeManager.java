@@ -8,6 +8,10 @@ import com.github.haroldjcastillo.btc.dao.TradePayloadResponse;
 import com.github.haroldjcastillo.btc.dao.TradeResponse;
 import com.github.haroldjcastillo.btc.ui.AbstractController;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+
 public class TradeManager {
 
 	public static void manage(final String response) {
@@ -26,7 +30,7 @@ public class TradeManager {
 					
 					AbstractController.CURRENT_PRICE.set(price);
 					updateTickName();
-					trade();
+					trade(payload);
 					TradeCache.put(payload.gettId(), payload);
 				}
 			}
@@ -35,15 +39,17 @@ public class TradeManager {
 		}
 	}
 
-	public static void trade() {
-		if (AbstractController.TICK_TYPE.equals(TickType.UP)
+	public static void trade(final TradePayloadResponse payload) {
+		if (AbstractController.TICK_TYPE.get().equals(TickType.UP)
 				&& AbstractController.M.get() == AbstractController.TICKS.get()) {
 			AbstractController.SELL.incrementAndGet();
 			AbstractController.TICKS.set(0);
-		} else if (AbstractController.TICK_TYPE.equals(TickType.DOWN)
+			updateTrades(AbstractController.UP_DATA, payload);
+		} else if (AbstractController.TICK_TYPE.get().equals(TickType.DOWN)
 				&& AbstractController.N.get() == AbstractController.TICKS.get()) {
 			AbstractController.BUY.incrementAndGet();
 			AbstractController.TICKS.set(0);
+			updateTrades(AbstractController.DOWN_DATA, payload);
 		}
 	}
 
@@ -56,5 +62,17 @@ public class TradeManager {
 			AbstractController.TICK_TYPE.set(TickType.NEUTRAL);
 		}
 	}
+	
+	public static void updateTrades(final ObservableList<TradePayloadResponse> observable, final TradePayloadResponse data) {
+        new Task<Void>() {
+            @Override
+            public Void call() throws Exception {
+                Platform.runLater(() -> {
+                    observable.add(data);
+                });
+                return Void.TYPE.newInstance();
+            }
+        }.run();
+    }
 
 }
