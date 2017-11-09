@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.haroldjcastillo.btc.ui.MainController">
 	<top>
 		<Pane>
 			<fx:include fx:id="header" source="header.fxml" />
@@ -13,13 +11,16 @@
 	</top>
 	<center>
 		<Pane>
-			<fx:include fx:id="ticks" source="ticks.fxml" />
+			<fx:include fx:id="orders" source="orders.fxml" />
+   		<Pane>
+   			<fx:include fx:id="ticks" source="ticks.fxml" />
+   		</Pane>
 		</Pane>
 	</center>
-	<bottom>
+	<right>
 		<Pane>
-			<fx:include fx:id="orders" source="orders.fxml" />
+			<fx:include fx:id="trade" source="left.fxml" />
 		</Pane>
-	</bottom>
+	</right>
 
 </BorderPane>

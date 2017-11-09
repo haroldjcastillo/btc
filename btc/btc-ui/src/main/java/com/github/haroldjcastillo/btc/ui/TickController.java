@@ -46,7 +46,7 @@ public class TickController extends AbstractController {
 				final Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent actionEvent) {
-						tickCount.setText(TICKS.toString());
+						tickCount.setText(String.valueOf(Math.abs(TICKS.get())));
 						descriptionTick.setText(TICK_TYPE.get().getValue());
 					}
 				}), new KeyFrame(Duration.seconds(2)));

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.github.haroldjcastillo.btc.dao.OrderPayload;
+import com.github.haroldjcastillo.btc.dao.TradePayloadResponse;
 import com.github.haroldjcastillo.btc.http.TickType;
 
 import javafx.collections.FXCollections;
@@ -24,6 +25,10 @@ public abstract class AbstractController {
 	
 	public static final ObservableList<OrderPayload> BIDS = FXCollections.observableArrayList();
 	
+	public static ObservableList<TradePayloadResponse> DOWN_DATA = FXCollections.observableArrayList();
+	
+	public static final ObservableList<TradePayloadResponse> UP_DATA = FXCollections.observableArrayList();
+	
 	public static ObservableList<OrderPayload> ASKS = FXCollections.observableArrayList();
 	
 	public static final AtomicInteger BEST = new AtomicInteger(10);
@@ -33,6 +38,14 @@ public abstract class AbstractController {
 	public static final AtomicReference<Double> CURRENT_PRICE = new AtomicReference<Double>(0.0);
 	
 	public static final AtomicReference<TickType> TICK_TYPE = new AtomicReference<TickType>(TickType.NEUTRAL);
+	
+	public static final AtomicInteger SELL = new AtomicInteger(0);
+	
+	public static final AtomicInteger BUY = new AtomicInteger(0);
+	
+	public static final AtomicInteger M = new AtomicInteger(10);
+	
+	public static final AtomicInteger N = new AtomicInteger(10);
 
 	protected <T> T getControler(final String controller) {
 		final FXMLLoader loader = new FXMLLoader();
@@ -45,5 +58,11 @@ public abstract class AbstractController {
 		}
 
 		return loader.getController();
+	}
+	
+	protected boolean isDigit(final String digit) {
+		if (digit.matches("\\d{1,10}")) {
+			return true;
+		} return false;
 	}
 }

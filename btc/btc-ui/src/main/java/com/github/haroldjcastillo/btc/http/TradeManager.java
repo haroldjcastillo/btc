@@ -14,7 +14,7 @@ public class TradeManager {
 
 		try {
 			final TradeResponse trade = ObjectMapperFactory.objectMapper.readValue(response, TradeResponse.class);
-			if(!trade.getPayload().isEmpty()) {
+			if (!trade.getPayload().isEmpty()) {
 				final TradePayloadResponse payload = trade.getPayload().get(0);
 				if (TradeCache.get(payload.gettId()) == null) {
 					final double price = Double.valueOf(payload.getPrice());
@@ -23,14 +23,27 @@ public class TradeManager {
 					} else if (price < AbstractController.CURRENT_PRICE.get()) {
 						AbstractController.TICKS.decrementAndGet();
 					}
-					System.out.println(price);
+					
 					AbstractController.CURRENT_PRICE.set(price);
 					updateTickName();
+					trade();
 					TradeCache.put(payload.gettId(), payload);
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public static void trade() {
+		if (AbstractController.TICK_TYPE.equals(TickType.UP)
+				&& AbstractController.M.get() == AbstractController.TICKS.get()) {
+			AbstractController.SELL.incrementAndGet();
+			AbstractController.TICKS.set(0);
+		} else if (AbstractController.TICK_TYPE.equals(TickType.DOWN)
+				&& AbstractController.N.get() == AbstractController.TICKS.get()) {
+			AbstractController.BUY.incrementAndGet();
+			AbstractController.TICKS.set(0);
 		}
 	}
 
