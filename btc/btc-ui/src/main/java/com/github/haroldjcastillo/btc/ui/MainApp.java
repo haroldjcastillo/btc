@@ -11,7 +11,7 @@ public class MainApp extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		final Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+		final Parent root = FXMLLoader.load(getClass().getResource("/fxml/splash.fxml"));
 		final Scene scene = new Scene(root);
 		stage.initStyle(StageStyle.TRANSPARENT);
 		stage.setTitle("Bitso");

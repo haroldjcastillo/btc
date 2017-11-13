@@ -12,7 +12,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import com.github.haroldjcastillo.business.config.HttpResponse;
 import com.github.haroldjcastillo.business.http.ExecutorService;
 
-class ExecutorServiceTest {
+public class ExecutorServiceTest {
 
 	private static final Logger LOGGER = LogManager.getLogger(ExecutorService.class);
 

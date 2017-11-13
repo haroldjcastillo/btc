@@ -7,6 +7,19 @@
 	<packaging>pom</packaging>
 	<name>Bitcoin</name>
 	<description>Bitcoin cryptocurrency exchange</description>
+	
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+		<junit.platform.version>5.0.1</junit.platform.version>
+		<junit.vintage.engine.version>4.12.1</junit.vintage.engine.version>
+		<junit.platform.launcher>1.0.1</junit.platform.launcher>
+		<junit.platform.runner>1.0.1</junit.platform.runner>
+		<junit.platform.surefire.provider>1.0.1</junit.platform.surefire.provider>
+		<org.apache.logging.log4j.version>2.9.1</org.apache.logging.log4j.version>
+	</properties>
+	
 	<modules>
 		<module>btc-business</module>
 		<module>btc-rxws</module>

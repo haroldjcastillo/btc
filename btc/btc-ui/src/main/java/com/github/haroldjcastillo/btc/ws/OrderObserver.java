@@ -21,7 +21,7 @@ public class OrderObserver implements Observer<String> {
 
     @Override
     public void onNext(final String frame) {
-        OrderConverter.convert(frame);
+        OrderManager.diffOrder(frame);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class TradeManager {
 			AbstractController.TICKS.set(0);
 			updateTrades(AbstractController.UP_DATA, payload);
 		} else if (AbstractController.TICK_TYPE.get().equals(TickType.DOWN)
-				&& AbstractController.N.get() == AbstractController.TICKS.get()) {
+				&& AbstractController.N.get() == Math.abs(AbstractController.TICKS.get())) {
 			AbstractController.BUY.incrementAndGet();
 			AbstractController.TICKS.set(0);
 			updateTrades(AbstractController.DOWN_DATA, payload);

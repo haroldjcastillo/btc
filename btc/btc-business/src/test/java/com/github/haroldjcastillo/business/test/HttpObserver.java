@@ -34,7 +34,7 @@ public class HttpObserver implements Observer<HttpResponse> {
 
 	@Override
 	public void onSubscribe(Disposable disposable) {
-		LOGGER.debug("Subscribe " + disposable);
+		LOGGER.debug("Subscribing, disposable " + disposable);
 	}
 
 }

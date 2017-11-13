@@ -46,6 +46,7 @@ public class WebSocket {
 			sslContext = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
 			uri = new URI("wss://ws.bitso.com");
 		} catch (SSLException | URISyntaxException e) {
+			LOGGER.error(e.getMessage(), e);
 			throw new IllegalStateException(e);
 		}
 	}

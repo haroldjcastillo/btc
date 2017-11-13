@@ -7,7 +7,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.github.haroldjcastillo.btc.dao.OrderPayload;
+import com.github.haroldjcastillo.btc.dao.Book;
+import com.github.haroldjcastillo.btc.dao.OrderBook;
 import com.github.haroldjcastillo.btc.dao.TradePayloadResponse;
 import com.github.haroldjcastillo.btc.http.TickType;
 
@@ -23,13 +24,13 @@ public abstract class AbstractController {
 
 	protected static final Logger LOGGER = LogManager.getLogger(AbstractController.class);
 	
-	public static final ObservableList<OrderPayload> BIDS = FXCollections.observableArrayList();
+	public static final ObservableList<Book> BIDS = FXCollections.observableArrayList();
 	
+	public static final ObservableList<Book> ASKS = FXCollections.observableArrayList();
+
 	public static final ObservableList<TradePayloadResponse> DOWN_DATA = FXCollections.observableArrayList();
 	
 	public static final ObservableList<TradePayloadResponse> UP_DATA = FXCollections.observableArrayList();
-	
-	public static final ObservableList<OrderPayload> ASKS = FXCollections.observableArrayList();
 	
 	public static final AtomicInteger BEST = new AtomicInteger(10);
 	
@@ -46,6 +47,8 @@ public abstract class AbstractController {
 	public static final AtomicInteger M = new AtomicInteger(3);
 	
 	public static final AtomicInteger N = new AtomicInteger(2);
+	
+	public static final AtomicReference<OrderBook> ORDER_BOOK = new AtomicReference<>();
 
 	protected <T> T getControler(final String controller) {
 		final FXMLLoader loader = new FXMLLoader();

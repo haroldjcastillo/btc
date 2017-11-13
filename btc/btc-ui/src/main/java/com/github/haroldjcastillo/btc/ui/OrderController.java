@@ -1,9 +1,13 @@
 package com.github.haroldjcastillo.btc.ui;
 
+import java.io.IOException;
 import java.util.Arrays;
 
-import com.github.haroldjcastillo.btc.dao.OrderPayload;
+import com.github.haroldjcastillo.btc.dao.Book;
+import com.github.haroldjcastillo.btc.ws.OrderManager;
 import com.github.haroldjcastillo.btc.ws.OrderObserver;
+import com.github.haroldjcastillo.business.config.HttpResponse;
+import com.github.haroldjcastillo.business.http.ExecutorService;
 import com.github.haroldjcastillo.rxws.WebSocket;
 import com.jfoenix.controls.JFXTextField;
 
@@ -16,12 +20,15 @@ public class OrderController extends AbstractController {
 
 	@FXML
 	private TickController tickController;
+
 	@FXML
 	private JFXTextField top;
+
 	@FXML
-	private TableView<OrderPayload> bidsTableView;
+	private TableView<Book> bidsTableView;
+
 	@FXML
-	private TableView<OrderPayload> asksTableView;
+	private TableView<Book> asksTableView;
 
 	private static boolean started = false;
 
@@ -59,15 +66,14 @@ public class OrderController extends AbstractController {
 			@Override
 			public void run() {
 				if (!started) {
-					connectWebsocket();
-					started = true;
+					started = loadCurrentOrders() && connectWebsocket();
 				}
 			}
 		};
 	}
 
-	private void connectWebsocket() {
-		final String[] types = { "trades", "diff-orders", "orders" };
+	private boolean connectWebsocket() {
+		final String[] types = { "diff-orders" };
 		final String[] channels = new String[types.length];
 		for (int i = 0; i < types.length; i++) {
 			final String frameMessage = "{ \"action\": \"subscribe\", \"book\": \"btc_mxn\", \"type\": \"" + types[i]
@@ -75,31 +81,45 @@ public class OrderController extends AbstractController {
 			channels[i] = frameMessage;
 		}
 		WebSocket.getInstance().connect(Arrays.asList(new OrderObserver())).addChannels(channels);
+		return true;
 	}
 
-	private void addOrderPayloadColumn(final TableView<OrderPayload> table) {
-		final TableColumn<OrderPayload, String> rate = new TableColumn<>("Rate");
-		rate.setCellValueFactory(new PropertyValueFactory<>("r"));
-		rate.prefWidthProperty().bind(table.widthProperty().divide(5));
-		table.getColumns().add(rate);
+	private boolean loadCurrentOrders() {
+		try {
+			final HttpResponse response = ExecutorService
+					.get("https://api.bitso.com/v3/order_book/?book=btc_mxn&aggregate=true");
+			final String order = new String(response.getContent());
+			OrderManager.orderBook(order);
+			return true;
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage(), e);
+			return false;
+		}
+	}
 
-		final TableColumn<OrderPayload, String> amount = new TableColumn<>("Amount");
-		amount.setCellValueFactory(new PropertyValueFactory<>("a"));
+	private void addOrderPayloadColumn(final TableView<Book> table) {
+		final TableColumn<Book, String> oid = new TableColumn<>("Order id");
+		oid.setCellValueFactory(new PropertyValueFactory<>("oid"));
+		oid.prefWidthProperty().bind(table.widthProperty().divide(5));
+		table.getColumns().add(oid);
+
+		final TableColumn<Book, String> book = new TableColumn<>("Book");
+		book.setCellValueFactory(new PropertyValueFactory<>("book"));
+		book.prefWidthProperty().bind(table.widthProperty().divide(5));
+		table.getColumns().add(book);
+
+		final TableColumn<Book, String> price = new TableColumn<>("Price");
+		price.setCellValueFactory(new PropertyValueFactory<>("price"));
+		price.prefWidthProperty().bind(table.widthProperty().divide(5));
+		table.getColumns().add(price);
+
+		final TableColumn<Book, String> amount = new TableColumn<>("Amount");
+		amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		amount.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(amount);
 
-		final TableColumn<OrderPayload, String> type = new TableColumn<>("Type");
-		type.setCellValueFactory(new PropertyValueFactory<>("t"));
-		type.prefWidthProperty().bind(table.widthProperty().divide(5));
-		table.getColumns().add(type);
-
-		final TableColumn<OrderPayload, String> delta = new TableColumn<>("Delta");
-		delta.setCellValueFactory(new PropertyValueFactory<>("d"));
-		delta.prefWidthProperty().bind(table.widthProperty().divide(5));
-		table.getColumns().add(delta);
-
-		final TableColumn<OrderPayload, String> value = new TableColumn<>("Value");
-		value.setCellValueFactory(new PropertyValueFactory<>("v"));
+		final TableColumn<Book, String> value = new TableColumn<>("Value");
+		value.setCellValueFactory(new PropertyValueFactory<>("value"));
 		value.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(value);
 	}

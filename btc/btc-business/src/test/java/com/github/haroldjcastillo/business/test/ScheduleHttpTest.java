@@ -3,10 +3,13 @@ package com.github.haroldjcastillo.business.test;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import com.github.haroldjcastillo.business.http.ScheduleHttp;
 
-class ScheduleHttpTest {
+@RunWith(JUnitPlatform.class)
+public class ScheduleHttpTest {
 
 	@Test
 	void test() throws InterruptedException {
@@ -21,7 +24,6 @@ class ScheduleHttpTest {
 				beeper.stop();
 			}
 		}
-		
 	}
 
 }
