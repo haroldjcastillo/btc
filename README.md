@@ -35,7 +35,7 @@ The UI is composed for 5 important parts.
 
 ![4](https://github.com/haroldjcastillo/btc/blob/master/docs/buydsell.png?raw=true)
 
- 5. The buy and sell of BTC into the application (simulation)
+ 5. Recent trades
 
 ![5](https://github.com/haroldjcastillo/btc/blob/master/docs/recent.png?raw=true)
 
@@ -49,13 +49,7 @@ Consecutive <b>M</b> upticks and <b>N</b> downticks
 
 ![1](https://github.com/haroldjcastillo/btc/blob/master/docs/MaxMN.png?raw=true)
 
-In the folder <b>dist</b> you can download the jar of the application, run it! :+1:
-
-```shell
-java -jar btc.jar
-```
-
-Or build the project with maven
+build it! the project with maven :+1:
 
 ```shell
 git clone https://github.com/haroldjcastillo/btc.git
