@@ -37,7 +37,7 @@ public class TickController extends AbstractController {
 		return new Runnable() {
 			public void run() {
 				if (schedule == null) {
-					final String url = "https://api.bitso.com/v3/trades/?book=btc_mxn&marker&sort=desc&limit=1";
+					final String url = "https://api.bitso.com/v3/trades/?book=btc_mxn&limit=1";
 					final TradeObserver observer = new TradeObserver();
 					schedule = new ScheduleHttp(url, delay, Arrays.asList(observer));
 					schedule.start();

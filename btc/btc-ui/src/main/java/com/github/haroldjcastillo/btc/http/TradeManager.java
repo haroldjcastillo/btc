@@ -2,6 +2,7 @@ package com.github.haroldjcastillo.btc.http;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import com.github.haroldjcastillo.btc.common.ObjectMapperFactory;
@@ -23,7 +24,7 @@ public class TradeManager {
 			final TradeResponse trade = ObjectMapperFactory.objectMapper.readValue(response, TradeResponse.class);
 			if (!trade.getPayload().isEmpty()) {
 				final TradePayloadResponse payload = trade.getPayload().get(0);
-				if (TradeCache.get(payload.gettId()) == null) {
+				if (TradeCache.get(payload.getTId()) == null) {
 					final double price = Double.valueOf(payload.getPrice());
 					if (price > AbstractController.CURRENT_PRICE.get()) {
 						AbstractController.TICKS.incrementAndGet();
@@ -35,7 +36,7 @@ public class TradeManager {
 					updateTickName();
 					trade(payload);
 					addRecentTrade(payload);
-					TradeCache.put(payload.gettId(), payload);
+					TradeCache.put(payload.getTId(), payload);
 				}
 			}
 		} catch (IOException e) {
@@ -56,18 +57,22 @@ public class TradeManager {
 		});
 	}
 
-	public static void trade(final TradePayloadResponse payload) {
+	private static void trade(final TradePayloadResponse payload) {
 		if (AbstractController.TICK_TYPE.get().equals(TickType.UP)
 				&& AbstractController.M.get() == AbstractController.TICKS.get()) {
-			AbstractController.SELL.incrementAndGet();
-			AbstractController.TICKS.set(0);
+			updateTicks(AbstractController.SELL);
 			updateTrades(AbstractController.UP_DATA, payload);
 		} else if (AbstractController.TICK_TYPE.get().equals(TickType.DOWN)
 				&& AbstractController.N.get() == Math.abs(AbstractController.TICKS.get())) {
-			AbstractController.BUY.incrementAndGet();
-			AbstractController.TICKS.set(0);
+			updateTicks(AbstractController.BUY);
 			updateTrades(AbstractController.DOWN_DATA, payload);
 		}
+	}
+
+	private static void updateTicks(final AtomicInteger type) {
+		type.incrementAndGet();
+		AbstractController.TICKS.set(0);
+		AbstractController.TICK_TYPE.set(TickType.NEUTRAL);
 	}
 
 	private static void updateTickName() {
@@ -80,7 +85,7 @@ public class TradeManager {
 		}
 	}
 	
-	public static void updateTrades(final ObservableList<TradePayloadResponse> observable, final TradePayloadResponse data) {
+	private static void updateTrades(final ObservableList<TradePayloadResponse> observable, final TradePayloadResponse data) {
         new Task<Void>() {
             @Override
             public Void call() throws Exception {

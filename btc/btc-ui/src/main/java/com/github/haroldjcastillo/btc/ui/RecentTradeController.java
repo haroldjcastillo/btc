@@ -4,11 +4,13 @@ import com.github.haroldjcastillo.btc.dao.TradePayloadResponse;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
@@ -44,8 +46,10 @@ public class RecentTradeController extends AbstractController {
 	}
 
 	private void addColumns(final TableView<TradePayloadResponse> table) {
-		final TableColumn<TradePayloadResponse, String> tId = new TableColumn<>("Transaction id");
-		tId.setCellValueFactory(new PropertyValueFactory<>("tId"));
+		final TableColumn<TradePayloadResponse, Long> tId = new TableColumn<>("Transaction id");
+		tId.setCellValueFactory(
+				(CellDataFeatures<TradePayloadResponse, Long> cellData) -> new ReadOnlyObjectWrapper<Long>(
+						cellData.getValue().getTId()));
 		tId.prefWidthProperty().bind(table.widthProperty().divide(5));
 		table.getColumns().add(tId);
 

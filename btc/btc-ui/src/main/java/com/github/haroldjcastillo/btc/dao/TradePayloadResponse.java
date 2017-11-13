@@ -19,7 +19,7 @@ public class TradePayloadResponse implements Comparable<TradePayloadResponse> {
 	private String price;
 
 	@JsonAlias("tid")
-	private long tId;
+	private Long tId;
 
 	public String getBook() {
 		return book;
@@ -61,11 +61,11 @@ public class TradePayloadResponse implements Comparable<TradePayloadResponse> {
 		this.price = price;
 	}
 
-	public long gettId() {
+	public Long getTId() {
 		return tId;
 	}
 
-	public void settId(long tId) {
+	public void setTId(Long tId) {
 		this.tId = tId;
 	}
 

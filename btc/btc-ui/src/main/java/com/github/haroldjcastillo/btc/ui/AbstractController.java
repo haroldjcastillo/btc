@@ -46,7 +46,7 @@ public abstract class AbstractController {
 	
 	public static final AtomicInteger BUY = new AtomicInteger(0);
 	
-	public static final AtomicInteger M = new AtomicInteger(3);
+	public static final AtomicInteger M = new AtomicInteger(2);
 	
 	public static final AtomicInteger N = new AtomicInteger(2);
 	

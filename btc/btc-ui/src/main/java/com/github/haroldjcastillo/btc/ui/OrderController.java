@@ -87,7 +87,7 @@ public class OrderController extends AbstractController {
 	private boolean loadCurrentOrders() {
 		try {
 			final HttpResponse response = ExecutorService
-					.get("https://api.bitso.com/v3/order_book/?book=btc_mxn&aggregate=true");
+					.get("https://api.bitso.com/v3/order_book/?book=btc_mxn&aggregate=false");
 			final String order = new String(response.getContent());
 			OrderManager.orderBook(order);
 			return true;
