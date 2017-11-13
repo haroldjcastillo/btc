@@ -66,7 +66,7 @@ It's posible to configure the HTTP connection, request and socket timeout in the
 > **Additional notes:**
 > - The http request for query the trades it's called each 1 second.
 > - In each Sell or Buy the ticks counter it's restarted.
-> - By defaul the X value it's 10 and M and N it's 2 
+> - By default the X value it's 10 and M and N it's 2 
 
 ## Checklist
 
