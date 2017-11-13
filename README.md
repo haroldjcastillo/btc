@@ -2,19 +2,6 @@
 
 This project has as objective shows how to connect to the websocket and web service of Bitso cryptocurrency exchange using rxjava as a implementation of observer pattern and manipulates the data in real time.
 
-## Checklist
-
-|Feature| File name | Method name |
- ----------------- | ---------------------------- | ------------------
-|Schedule the polling of trades over REST.|com.github.haroldjcastillo.business.http.ScheduleHttp|start()|
-|Request a book snapshot over REST.|com.github.haroldjcastillo.btc.ui.OrderController|loadCurrentOrders()|
-|Listen for diff-orders over websocket.|com.github.haroldjcastillo.btc.ws.OrderObserver|onNext(java.lang.String)|
-|Replay diff-orders.|com.github.haroldjcastillo.btc.ws.OrderManager|diffOrder(java.lang.String)|
-|Use config option X to request  recent trades.|com.github.haroldjcastillo.btc.http.TradeManager|addRecentTrade(com.github.haroldjcastillo.btc.dao.TradePayloadResponse)|
-|Use config option X to limit number of ASKs displayed in UI.|com.github.haroldjcastillo.btc.ws.OrderManager|toSortBook(javafx.collections.ObservableList, List)|
-|The loop that causes the trading algorithm to reevaluate.|com.github.haroldjcastillo.btc.ws.OrderManager|diffOrder(java.lang.String)|
-
-
 ![1](https://raw.githubusercontent.com/haroldjcastillo/btc/master/docs/parts.png)
 
 The UI is composed for 5 important parts.
@@ -77,5 +64,18 @@ It's posible to configure the HTTP connection, request and socket timeout in the
 ```
 
 > **Additional notes:**
-> - The http request for query the trades it's called each 2 seconds.
+> - The http request for query the trades it's called each 1 second.
 > - In each Sell or Buy the ticks counter it's restarted.
+> - By defaul the X value it's 10 and M and N it's 2 
+
+## Checklist
+
+|Feature| File name | Method name |
+ ----------------- | ---------------------------- | ------------------
+|Schedule the polling of trades over REST.|[ScheduleHttp](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-business/src/main/java/com/github/haroldjcastillo/business/http/ScheduleHttp.java)|[start()](https://github.com/haroldjcastillo/btc/blob/8c512119591d0b1b56d55c6571c5e7a98ed6e5b2/btc/btc-business/src/main/java/com/github/haroldjcastillo/business/http/ScheduleHttp.java#L38)|
+|Request a book snapshot over REST.|[OrderController](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ui/OrderController.java)|[loadCurrentOrders()](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ui/OrderController.java#L87)|
+|Listen for diff-orders over websocket.|[OrderObserver](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderObserver.java)|[onNext(java.lang.String)](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderObserver.java#L23)|
+|Replay diff-orders.|[OrderManager](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java)|[diffOrder(java.lang.String)](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java#L44)|
+|Use config option X to request  recent trades.|[TradeManager](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/http/TradeManager.java)|[addRecentTrade(com.github.haroldjcastillo.btc.dao.TradePayloadResponse)](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/http/TradeManager.java#L47)|
+|Use config option X to limit number of ASKs displayed in UI.|[OrderManager](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java)|[toSortBook(javafx.collections.ObservableList, List)](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java#L91)|
+|The loop that causes the trading algorithm to reevaluate.|[OrderManager](https://github.com/haroldjcastillo/btc/blob/master/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java)|[diffOrder(java.lang.String)](https://github.com/haroldjcastillo/btc/blob/1c0a5c7943595bbd7c89fbb1857ecdd9e71dedd5/btc/btc-ui/src/main/java/com/github/haroldjcastillo/btc/ws/OrderManager.java#L44)|
