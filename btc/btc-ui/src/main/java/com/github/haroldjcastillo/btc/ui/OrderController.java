@@ -58,7 +58,7 @@ public class OrderController extends AbstractController {
 		asksTableView.setItems(ASKS);
 		bidsTableView.setItems(BIDS);
 		loadListeners();
-		service().run();
+		new Thread(service()).run();
 	}
 
 	public Runnable service() {
