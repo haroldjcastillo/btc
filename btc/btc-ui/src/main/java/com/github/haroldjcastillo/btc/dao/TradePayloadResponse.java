@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TradePayloadResponse {
+public class TradePayloadResponse implements Comparable<TradePayloadResponse> {
 
 	private String book;
 
@@ -67,6 +67,13 @@ public class TradePayloadResponse {
 
 	public void settId(long tId) {
 		this.tId = tId;
+	}
+
+	@Override
+	public int compareTo(TradePayloadResponse o) {
+		final Double from = Double.valueOf(this.getPrice()) * Double.valueOf(this.getAmount());
+		final Double to = Double.valueOf(o.getPrice()) * Double.valueOf(o.getAmount());
+		return from.compareTo(to);
 	}
 
 }

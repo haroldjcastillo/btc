@@ -26,7 +26,6 @@ import com.github.haroldjcastillo.btc.ui.AbstractController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 
 /**
  *
@@ -91,13 +90,15 @@ public class OrderManager {
 
 	private static void toSortBook(final ObservableList<Book> book, final List<Book> books) {
 		// Prevent the concurrent modification in the ObservableList JavaFX data table
-		final ObservableList<Book> copies = FXCollections.observableArrayList(book);
-		final List<Book> sortedList = Stream.concat(books.stream(), copies.stream())
-				.collect(
-						collectingAndThen(toCollection(() -> new TreeSet<>(comparing(Book::getValue))), ArrayList::new))
-				.stream().sorted((o1, o2) -> o2.compareTo(o1)).limit(AbstractController.BEST.intValue())
-				.collect(Collectors.toList());
-		updateOrderBook(book, sortedList);
+		Platform.runLater(() -> {
+			final ObservableList<Book> copies = FXCollections.observableArrayList(book);
+			final List<Book> sortedList = Stream.concat(books.stream(), copies.stream())
+					.collect(
+							collectingAndThen(toCollection(() -> new TreeSet<>(comparing(Book::getValue))), ArrayList::new))
+					.stream().sorted((o1, o2) -> o2.compareTo(o1)).limit(AbstractController.BEST.intValue())
+					.collect(Collectors.toList());
+			book.setAll(sortedList);
+		});
 	}
 
 	private static boolean isValidSequence(final String sequence) {
@@ -109,15 +110,4 @@ public class OrderManager {
 		return false;
 	}
 
-	private static void updateOrderBook(final ObservableList<Book> book, final List<Book> books) {
-		new Task<Void>() {
-			@Override
-			public Void call() throws Exception {
-				Platform.runLater(() -> {
-					book.setAll(books);
-				});
-				return Void.TYPE.newInstance();
-			}
-		}.run();
-	}
 }

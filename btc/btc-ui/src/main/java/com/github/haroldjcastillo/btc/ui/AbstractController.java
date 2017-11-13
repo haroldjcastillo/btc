@@ -32,6 +32,8 @@ public abstract class AbstractController {
 	
 	public static final ObservableList<TradePayloadResponse> UP_DATA = FXCollections.observableArrayList();
 	
+	public static final ObservableList<TradePayloadResponse> RECENT_TRADES = FXCollections.observableArrayList();
+	
 	public static final AtomicInteger BEST = new AtomicInteger(10);
 	
 	public static final AtomicInteger TICKS = new AtomicInteger(0);

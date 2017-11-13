@@ -9,6 +9,11 @@
 			<fx:include fx:id="header" source="header.fxml" />
 		</Pane>
 	</top>
+	<left>
+		<Pane>
+			<fx:include fx:id="recent" source="recent.fxml" />
+		</Pane>
+	</left>
 	<center>
 		<Pane>
 			<fx:include fx:id="orders" source="orders.fxml" />
@@ -19,7 +24,7 @@
 	</center>
 	<right>
 		<Pane>
-			<fx:include fx:id="trade" source="left.fxml" />
+			<fx:include fx:id="trade" source="right.fxml" />
 		</Pane>
 	</right>
 

@@ -6,18 +6,18 @@ This project has as objective shows how to connect to the websocket and web serv
 
 |Feature| File name | Method name |
  ----------------- | ---------------------------- | ------------------
-|Schedule the polling of trades over REST.|||
-|Request a book snapshot over REST.|||
-|Listen for diff-orders over websocket.|||
-|Replay diff-orders.|||
-|Use config option X to request  recent trades.|||
-|Use config option X to limit number of ASKs displayed in UI.|||
-|The loop that causes the trading algorithm to reevaluate.|||
+|Schedule the polling of trades over REST.|com.github.haroldjcastillo.business.http.ScheduleHttp|start()|
+|Request a book snapshot over REST.|com.github.haroldjcastillo.btc.ui.OrderController|loadCurrentOrders()|
+|Listen for diff-orders over websocket.|com.github.haroldjcastillo.btc.ws.OrderObserver|onNext(java.lang.String)|
+|Replay diff-orders.|com.github.haroldjcastillo.btc.ws.OrderManager|diffOrder(java.lang.String)|
+|Use config option X to request  recent trades.|com.github.haroldjcastillo.btc.http.TradeManager|addRecentTrade(com.github.haroldjcastillo.btc.dao.TradePayloadResponse)|
+|Use config option X to limit number of ASKs displayed in UI.|com.github.haroldjcastillo.btc.ws.OrderManager|toSortBook(javafx.collections.ObservableList, List)|
+|The loop that causes the trading algorithm to reevaluate.|com.github.haroldjcastillo.btc.ws.OrderManager|diffOrder(java.lang.String)|
 
 
 ![1](https://raw.githubusercontent.com/haroldjcastillo/btc/master/docs/parts.png)
 
-The UI is composed for 4 important parts.
+The UI is composed for 5 important parts.
 
  1. Header, where we can to stop all the connections and close the application
 
@@ -33,11 +33,15 @@ The UI is composed for 4 important parts.
 
  4. The buy and sell of BTC into the application (simulation)
 
-![1](https://github.com/haroldjcastillo/btc/blob/master/docs/buydsell.png?raw=true)
+![4](https://github.com/haroldjcastillo/btc/blob/master/docs/buydsell.png?raw=true)
+
+ 5. The buy and sell of BTC into the application (simulation)
+
+![5](https://github.com/haroldjcastillo/btc/blob/master/docs/recent.png?raw=true)
 
 ## Configurations 
 
-The <b>X</b> best bids and <b>X</b> best asks 
+The <b>X</b> best bids, best asks and recent trades
 
 ![1](https://github.com/haroldjcastillo/btc/blob/master/docs/MaxX.png?raw=true)
 

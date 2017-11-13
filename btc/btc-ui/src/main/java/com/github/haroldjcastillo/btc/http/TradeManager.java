@@ -1,6 +1,8 @@
 package com.github.haroldjcastillo.btc.http;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.haroldjcastillo.btc.common.ObjectMapperFactory;
 import com.github.haroldjcastillo.btc.common.TradeCache;
@@ -9,6 +11,7 @@ import com.github.haroldjcastillo.btc.dao.TradeResponse;
 import com.github.haroldjcastillo.btc.ui.AbstractController;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
@@ -31,12 +34,26 @@ public class TradeManager {
 					AbstractController.CURRENT_PRICE.set(price);
 					updateTickName();
 					trade(payload);
+					addRecentTrade(payload);
 					TradeCache.put(payload.gettId(), payload);
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void addRecentTrade(final TradePayloadResponse trade) {
+		updateTrades(AbstractController.RECENT_TRADES, trade);
+		Platform.runLater(() -> {
+			final ObservableList<TradePayloadResponse> copies = FXCollections
+					.observableArrayList(AbstractController.RECENT_TRADES);
+			final List<TradePayloadResponse> sortedList = copies.stream()
+					.sorted((o1, o2) -> o2.compareTo(o1))
+					.limit(AbstractController.BEST.intValue())
+					.collect(Collectors.toList());
+			AbstractController.RECENT_TRADES.setAll(sortedList);
+		});
 	}
 
 	public static void trade(final TradePayloadResponse payload) {
