@@ -29,7 +29,7 @@ public class TickController extends AbstractController {
 
 	@FXML
 	public void initialize() {
-		service(2).run();
+		new Thread(service(2)).start();
 	}
 
 	public Runnable service(final long delay) {
