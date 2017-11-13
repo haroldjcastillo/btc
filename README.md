@@ -2,7 +2,13 @@
 
 This project has as objective shows how to connect to the websocket and web service of Bitso cryptocurrency exchange using rxjava as a implementation of observer pattern and manipulates the data in real time.
 
-![1](https://raw.githubusercontent.com/haroldjcastillo/btc/master/docs/parts.png)
+The first window that you can see it's of the loading, works as a splash screen, while the app start.
+
+![1](https://raw.githubusercontent.com/haroldjcastillo/btc/master/docs/loading.png?raw=true)
+
+After load, the app shows the next window
+
+![1](https://raw.githubusercontent.com/haroldjcastillo/btc/master/docs/parts.png?raw=true)
 
 The UI is composed for 5 important parts.
 
