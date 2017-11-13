@@ -9,23 +9,27 @@
 			<fx:include fx:id="header" source="header.fxml" />
 		</Pane>
 	</top>
-	<left>
+	<bottom>
 		<Pane>
 			<fx:include fx:id="recent" source="recent.fxml" />
 		</Pane>
-	</left>
+	</bottom>
 	<center>
-		<Pane>
-			<fx:include fx:id="orders" source="orders.fxml" />
-   		<Pane>
-   			<fx:include fx:id="ticks" source="ticks.fxml" />
-   		</Pane>
-		</Pane>
+		<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+		<right>
+			<Pane>
+				<fx:include fx:id="orders" source="orders.fxml" />
+	   		<Pane>
+	   			<fx:include fx:id="ticks" source="ticks.fxml" />
+	   		</Pane>
+			</Pane>	
+		</right>
+		<left>
+			<Pane>
+				<fx:include fx:id="trade" source="right.fxml" />
+			</Pane>
+		</left>
+		</BorderPane>
 	</center>
-	<right>
-		<Pane>
-			<fx:include fx:id="trade" source="right.fxml" />
-		</Pane>
-	</right>
 
 </BorderPane>

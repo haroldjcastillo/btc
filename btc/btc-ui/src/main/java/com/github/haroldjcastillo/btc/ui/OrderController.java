@@ -9,11 +9,11 @@ import com.github.haroldjcastillo.btc.ws.OrderObserver;
 import com.github.haroldjcastillo.business.config.HttpResponse;
 import com.github.haroldjcastillo.business.http.ExecutorService;
 import com.github.haroldjcastillo.rxws.WebSocket;
-import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class OrderController extends AbstractController {
@@ -22,7 +22,7 @@ public class OrderController extends AbstractController {
 	private TickController tickController;
 
 	@FXML
-	private JFXTextField top;
+	private TextField top;
 
 	@FXML
 	private TableView<Book> bidsTableView;
