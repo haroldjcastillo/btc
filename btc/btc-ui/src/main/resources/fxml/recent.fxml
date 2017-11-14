@@ -10,13 +10,13 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TableView fx:id="recentTrades" layoutX="353.0" layoutY="60.0" prefHeight="136.0" prefWidth="574.0" />
-            <Label layoutX="413.0" layoutY="25.0" text="Recent trades" textFill="#f8f8f8">
+            <TableView fx:id="recentTrades" layoutX="250.0" layoutY="36.0" prefHeight="175.0" prefWidth="800.0" />
+            <Label layoutX="303.0" layoutY="4.0" text="Recent trades" textFill="#f8f8f8">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="recentValue" layoutX="363.0" layoutY="28.0" text="Label" textFill="WHITE">
+            <Label fx:id="recentValue" layoutX="253.0" layoutY="7.0" text="Label" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
